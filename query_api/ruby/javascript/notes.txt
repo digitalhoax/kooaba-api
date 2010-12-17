@@ -1,0 +1,19 @@
+
+HTTP POST call with multipart/data
+
+http://stackoverflow.com/questions/3537774/making-an-http-post-call-with-multipart-form-data-using-jquery
+=> you can't upload files from file upload button
+
+Maybe from another resource....
+
+
+fetch file from another resource wia ajax then send it to the recognition
+
+
+
+Javascript und binary daten ist scheisse... vielleicht müssen die Bilder base64 encodiert werden?
+
+interesting resources: 
+
+
+
