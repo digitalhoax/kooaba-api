@@ -165,7 +165,7 @@ _[Binary Data]_
 Specifies the group to search in. To search in multiple groups at once, you can add multiple group parts to the multipart body (one for each group).
 
 ##### Headers:
-__Content-Disposition__ : `form-data; name="query[group_ids][]"`
+_Content-Disposition_ : `form-data; name="query[group_ids][]"`
 
 ##### Content 
 (type=integer), example: `32`
@@ -184,44 +184,44 @@ _Content-Disposition_     : `form-data; name="query[multiple_items]"`
 The location parts allows for specifying GPS coordinates for a request, as for instance obtained from a mobile client device. The location is set with two parts, latitude and longitude, which follow the exact same structure.
 
 ##### Headers (Latitude):
-__Content-Disposition__     : _form-data; name="query[latitude]"
+_Content-Disposition_     : `form-data; name="query[latitude]"`
 
 ##### Content (Latitude):
-(type=double), example:37.33168900
+(type=double), example: `37.33168900`
 
 ##### Headers (Longitude):
-__Content-Disposition__     : _form-data; name="query[longitude]"
+_Content-Disposition_     : `form-data; name="query[longitude]"`
 
 ##### Content (Longitude):
-(type=double), example: -122.03073100
+(type=double), example: `-122.03073100`
 
 #### Bounding Box part (optional)
 This parameter allows for retrieving the area in the query image that matched the database image. The area is defined by a bounding box with four corners.
  
 ##### Headers:
-__Content-Disposition__ : _form-data; name="query[bounding_box]" 
+_Content-Disposition_ : `form-data; name="query[bounding_box]"` 
 
 ##### Content 
-(type=boolean, either "true" or "false", default is "false"), example: true
+(type=boolean, either `true` or `false`, default is `false`), example: `true`
 
 #### Country part (optional)
 Allows for filtering results for items that are associated with a country (applies mainly to media covers like books, CD's , etc.)
 
 ##### Headers:  
-__Content-Disposition__ : _form-data; name="query[country]"
+_Content-Disposition_ : `form-data; name="query[country]"`
 
 ##### Content:  
 (type=string, ISO 3166-1 Alpha-2 country code), 
-example: US If no matching item resource is found, all item resources are returned in order to minimize network traffic. 
+example: `US`
 
 #### Language part (optional) 
 Allows for filtering for items that are associated with a language (applies mainly to media covers like books, CD's , etc.)
 
 ##### Headers:  
-__Content-Disposition__ : _form-data; name="query[language]" 
+_Content-Disposition_ : `form-data; name="query[language]"`
 
 ##### Content:  
-(type=string, IETF language tag), example: en
+(type=string, IETF language tag), example: `en`
 
 - - -
 
