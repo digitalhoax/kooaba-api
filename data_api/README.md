@@ -1,27 +1,39 @@
-*2010-05-21*
-
 # kooaba Data API
+Data API Version 1.1 (2010-12-20)
 
+
+## Introduction
 The kooaba data API provides the ability to manage content in kooaba's image recognition system.
-It is implemented as a RESTful web service using XML data over HTTP and allows to add and remove
-images, as well as their associated meta data.
+It is implemented as a [RESTful](http://en.wikipedia.org/wiki/Representational_State_Transfer) web service using XML data over HTTP and allows to add and remove
+images, as well as their associated meta data. Images that have been uploaded via the Data API are then available for recognition via the Query API.
 
 ## Data Model
 
-The recognition system is organized into groups, items, images and resources. API users are member
-of one or more groups, which they can add data to.
+The recognition system is organized into groups, items, images and item-resources. API users are member
+of one or more groups, which they can add data to. 
 
-When adding data to the system, you start with an item. An item represents the physical object you 
-want to make recognizable. It is a container for images which identify the object. When the item
-has been created, you can create associated images. You can also store a reference-id in the item,
-while creating it. This reference-id can then be used to get the item later.
+Each item can have one or more reference images associated with it. Each of these images can "trigger" the recognition of the item, when a query image matches the respective database image.
+
+Each item can also have meta-data associated with it. We call this meta-data item-resources. (Not to be confused with the resources in the REST terminology.)
+
+## Basic Workflow
+
+The workflow follows the data structure (and is reflected accordingly in the REST URLs).
+
+Before adding any data to the system, you need write permission for a _group_. If you don't have write access to any group yet, please contact kooaba sales to get access.
+
+When adding data to the system, you start with an _item_. An item represents the physical object you 
+want to make recognizable. It is a container for images which identify the object. Besides the images, the item contains also associated meta-data, among other things the mandatory title. A particularly important meta-data field for an item is the reference-id. This is an id you can set, and which is later returned when making requests. Typically you would use this to associate the items in our system with your internal id scheme.
+
+After an item has been created, you can add associated _images_. To that end, you first upload a binary file to our service, and then associate it with an image resource.
 
 ## Authentication
 
-Authentication is managed using our custom KWS HTTP authentication scheme. Every request must include
-the Authorization HTTP header. See our separate document on how to construct the KWS header value.
+All requests to the kooaba API's have to be authenticated. Authentication is managed using our custom KWS HTTP authentication scheme. 
 
-## Requests
+Authentication is [described on the Query API Documentation](../query_api/README.md).
+
+## Making Requests
 
 There are two basic types of requests, read requests and write requests. Read requests are HTTP GET
 requests which return XML-encoded data representations of the requested resources. Write requests
@@ -30,18 +42,18 @@ allow to create new resources (POST), update existing resources (PUT) or delete 
 ### Access Control
 
 When trying to access resources which do not belong to the user, an empty response with status code
-403 Forbidden is returned.
+`403 Forbidden` is returned.
 
 When trying to perform write operations on read-only resources, an empty response with status code
-405 Method Not Allowed is returned.
+`405 Method Not Allowed` is returned.
 
-## Resources
+## Overview of REST Resources
+
+All data can be accessed and as REST resources. Below follows a description of all resources and their actions.
 
 ### Groups
 
-Group resources are read-only.
-
----
+Groups are read-only.
 
 #### Show
 
@@ -49,7 +61,7 @@ Returns an existing group.
 
 **Request**
 
-`GET /api/groups/#{id}.xml`
+    GET /api/groups/#{id}.xml
 
 **Response**
 
@@ -61,15 +73,13 @@ Returns an existing group.
       <items-count type="integer">2</items-count>
     </group>
 
----
-
 #### Index
 
 Returns a list of groups the API user is a member of.
 
 **Request**
 
-`GET /api/groups.xml`
+    `GET /api/groups.xml`
 
 **Response**
     
@@ -81,12 +91,11 @@ Returns a list of groups the API user is a member of.
       </group>
     </groups>
 
+--- 
 
 ### Items
 
-Item resources have read and write permissions.
-
----
+Item have read and write permissions.
 
 #### Show
 
@@ -94,7 +103,7 @@ Returns an existing item.
 
 **Request**
 
-`GET /api/items/#{id}.xml`
+    GET /api/items/#{id}.xml
 
 **Response**
 
@@ -120,15 +129,13 @@ Returns an existing item.
       </images>
     </item>
 
----
-
 #### Index
 
 Returns a list of items belonging to a given group
 
 **Request**
 
-`GET /api/groups/#{group_id}/items.xml`
+    GET /api/groups/#{group_id}/items.xml
 
 **Response**
 
@@ -143,14 +150,13 @@ Returns a list of items belonging to a given group
       </item>
     </items>
 
----
 
 Returns a list of items belonging to a given group and having the attribute values specified in xml
 
 **Request**
 
-`GET /api/groups/#{group_id}/items.xml?item[title]=MyTitle`
- params can be item[title] or item[reference_id]
+    GET /api/groups/#{group_id}/items.xml?item[title]=MyTitle
+    params can be item[title] or item[reference_id]
  
 **Response**
 
@@ -175,7 +181,7 @@ Returns a blank XML template that may be used as a guide for populating the fiel
 
 **Request**
 
-`GET /api/groups/#{group_id}/items/new.xml`
+    GET /api/groups/#{group_id}/items/new.xml
 
 **Response**
 
@@ -190,17 +196,21 @@ Returns a blank XML template that may be used as a guide for populating the fiel
 
 #### Create
 
-Creates a new item belonging to a given group.
+Creates a new item belonging to a given group. 
+
+The `title` field is mandatory and has to be set to a human-readable and -understandable string.
+
+An optional `reference-id` can be specified, which is returned as part of a response when querying via the Query API.
 
 **Request**
 
-`POST /api/groups/#{group_id}/items.xml`
+    POST /api/groups/#{group_id}/items.xml
 
     Content-Type: application/xml
 
     <item>
       <title>Item Title from API</title>
-      <reference-id>My reference id</reference-id>
+      <reference-id>776777</reference-id>
     </item>
     
 **Response**
@@ -211,14 +221,12 @@ Creates a new item belonging to a given group.
     <item>
       <id type="integer">78</id>
       <title>Item Title from API</title>
-      <reference-id>My reference id</reference-id>
+      <reference-id>776777</reference-id>
       <group-id type="integer">6</group-id>
       <created-at type="datetime">2010-02-11T15:17:50+01:00</created-at>
       <updated-at type="datetime">2010-02-11T15:17:50+01:00</updated-at>
       <images type="array"/>
     </item>
-
----
 
 #### Update
 
@@ -226,7 +234,7 @@ Updates information about the given item.
 
 **Request**
 
-`PUT /api/items/#{id}.xml`
+    PUT /api/items/#{id}.xml
     
     Content-Type: application/xml
 
@@ -238,26 +246,24 @@ Updates information about the given item.
 
     Status: 200 OK
 
----
-
 #### Destroy
 
 Destroys the given item and all of its associated images.
 
 **Request**
 
-`DELETE /api/items/#{id}.xml`
+    DELETE /api/items/#{id}.xml
 
 **Response**
 
     Status: 200 OK
 
+---
+
 ### Images
 
 Image resources have read and write permissions. In order to create images, image files must be uploaded first
 in order to be attached to an image resource.
-
----
 
 #### Show
 
@@ -265,7 +271,7 @@ Returns an existing image.
 
 **Request**
 
-`GET /api/images/#{id}.xml`
+    GET /api/images/#{id}.xml
 
 **Response**
 
@@ -282,15 +288,13 @@ Returns an existing image.
       <status>INACTIVE</status>
     </image>
 
----
-
 #### Index
 
 Returns a list of images belonging to a given item.
 
 **Request**
 
-`GET /api/items/#{item_id}/images.xml`
+    GET /api/items/#{item_id}/images.xml
 
 **Response**
 
@@ -305,15 +309,15 @@ Returns a list of images belonging to a given item.
       </image>
     </images>
 
----
-
 #### Create
 
-Creates a new image belonging to a given item using a previously uploaded file.
+Creates a new image belonging to a given item using a previously uploaded file. (See below for file uploads.)
+
+An image is associate with an item via the request URL.
 
 **Request**
 
-`POST /api/items/#{item_id}/images.xml`
+    POST /api/items/#{item_id}/images.xml
 
     Content-Type: application/xml
 
@@ -341,21 +345,17 @@ Creates a new image belonging to a given item using a previously uploaded file.
       <updated-at type="datetime">2010-02-12T15:57:20+01:00</updated-at>
     </image>
 
----
-
 #### Destroy
 
 Destroys the given image.
 
 **Request**
 
-`DELETE /api/images/#{id}.xml`
+    DELETE /api/images/#{id}.xml
 
 **Response**
 
     Status: 200 OK
-
----
 
 #### Status Update
 
@@ -363,7 +363,7 @@ Changes the status of the given image. The value of the status name must be ‘A
 
 **Request**
 
-`PUT /api/images/#{id}/status.xml`
+    PUT /api/images/#{id}/status.xml
 
     Content-Type: application/xml
 
@@ -398,6 +398,8 @@ Changes the status of the given image. The value of the status name must be ‘A
     <errors>
       <error>Status cannot be set to ACTIVE because no recognition server is configured.</error>
     </errors>
+    
+---
 
 ### Uploads
 
@@ -405,7 +407,7 @@ Some operations, like creating images, allow or require you to attach a file to 
 
 **Request**
 
-`POST /api/uploads.xml`
+    POST /api/uploads.xml
 
     Content-Type: image/jpeg
     
