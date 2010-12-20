@@ -101,11 +101,11 @@ Lists all the groups associated to the API user. Image queries can then be perfo
 
 ### Making the call
 
-__Verb__          : GET
+_Verb_         : GET
 
-__URL__           : http://search.kooaba.com/groups.xml
+_URL_           : http://search.kooaba.com/groups.xml
 
-__Authorization__ : _See above_
+_Authorization_ : _See above_
 
 ### Sample Response
 
@@ -131,17 +131,17 @@ HTTP status code 200 (OK)
 This is the main action of the query API. Creating a new query is done by sending a multipart POST request with image and a set of optional parameters.
 
 ### Making the call
-__Verb__ : POST
+_Verb_ : POST
 
-__URL__  : http://search.kooaba.com/queries.xml
+_URL_  : http://search.kooaba.com/queries.xml
 
 ### Request Headers
 
-__Content-Type__ : This must be set to `multipart/form-data`
+_Content-Type_ : This must be set to `multipart/form-data`
 
-__Date__         : Current date, defined by RFC 2616
+_Date_         : Current date, defined by RFC 2616
 
-__Authorization__  : _See above_
+_Authorization_  : _See above_
 
 
 ### Request Body
@@ -152,11 +152,11 @@ The request body needs to be composed as multipart MIME data as defined in [RFC 
 Specifies the query image to be sent to the service (in JPEG or PNG format). We recommend downscaling images to at most 640 pixels (at the larger side). Using query images smaller than 320 pixels is not recommended.
 
 ##### Headers:
-__Content-Type__              : _image/jpeg_ or _image/png_
+_Content-Type_              : `image/jpeg` or `image/png`
 
-__Content-Disposition__       :  _form-data; name="query[file]"_
+_Content-Disposition_       :  `form-data; name="query[file]"`
 
-__Content-Transfer-Encoding__ : _binary_
+_Content-Transfer-Encoding_ : _binary_
 
 ##### Content:
 _[Binary Data]_
@@ -165,18 +165,19 @@ _[Binary Data]_
 Specifies the group to search in. To search in multiple groups at once, you can add multiple group parts to the multipart body (one for each group).
 
 ##### Headers:
-__Content-Disposition__ : _form-data; name="query[group_ids][]"_
+__Content-Disposition__ : `form-data; name="query[group_ids][]"`
 
 ##### Content 
-(type=integer), example: _32_
+(type=integer), example: `32`
 
 #### Multiple items part (optional) 
 Some requests may return multiple matches, i.e. multiple reference images that match the query. This parameter allows for retrieving these multiple matches. When multiple items are returned, the response will also include a ``matches'' parameter, which indicates a score for each of the matches.
 
 ##### Headers:
-__Content-Disposition__     : _form-data; name="query[multiple_items]" 
+_Content-Disposition_     : `form-data; name="query[multiple_items]"`
+
 ##### Content:
-(type=boolean, either "true" or "false", default is "false"), example: true
+(type=boolean, either `true` or `false`, default is `false`), example: `true`
 
 
 #### Location Parts (optional)
