@@ -10,6 +10,3 @@ Access to the API can be obtained via [http://www.kooaba.com/en/developers/query
 ## Using the API
 
 Once you obtained your access keys, documentation on using the API's and some sample code are given in the subdirectories of this project.
-
-Read more about the [Query API](query_api/README.md).  
-Read more about the [Data API](data_api/README.md).
