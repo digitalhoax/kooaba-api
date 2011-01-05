@@ -27,13 +27,15 @@ want to make recognizable. It is a container for images which identify the objec
 
 After an item has been created, you can add associated _images_. To that end, you first upload a binary file to our service, and then associate it with an image resource.
 
+Each uploaded images then goes through an indexing process, until it is live. This process may take minutes up to a couple of hours currently depending on system load and some internal settings for your group. During this process the current status is reflected in a status variable, which can be checked via the API at any time.
+
 ## Authentication
 
 All requests to the kooaba API's have to be authenticated. Authentication is managed using our custom KWS HTTP authentication scheme. 
 
 Authentication is [described on the Query API Documentation](../query_api/README.md).
 
-## Making Requests
+## Making API Requests
 
 There are two basic types of requests, read requests and write requests. Read requests are HTTP GET
 requests which return XML-encoded data representations of the requested resources. Write requests
@@ -360,6 +362,23 @@ Destroys the given image.
 #### Status Update
 
 Changes the status of the given image. The value of the status name must be ‘ACTIVE’ or ‘INACTIVE’. Note that changing the status of an image might fail if the image is in the process of being activated.
+
+After uploading an image and setting the status to ‘ACTIVE’, the image will go through the following stati until is live:
+
+    ACTIVATION_QUEUED   Request for activation has been received and image is ready for indexing
+    ACTIVATING          Image is being indexed
+    ACTIVE              Image is live
+  
+Similarly, when setting an image to inactive, the sequence is as follows:
+
+    DEACTIVATION_QUEUED Request for deactivation received
+    DEACTIVATING        Image is being removed from index
+    INACTIVE            Image is deactivated
+  
+
+The status can be retrieved with a Show request for the image as described above at anytime.
+
+
 
 **Request**
 
