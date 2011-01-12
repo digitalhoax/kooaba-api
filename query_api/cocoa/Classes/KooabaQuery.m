@@ -74,10 +74,11 @@ NSData * SHA1Digest(NSString *inputString) {
 	[body appendData:[@"Content-Transfer-Encoding: binary\r\n" dataUsingEncoding:NSASCIIStringEncoding]];
 	[body appendData:[@"\r\n" dataUsingEncoding:NSASCIIStringEncoding]];
 	[body appendData:imageData];
+	[body appendData:[@"\r\n" dataUsingEncoding:NSASCIIStringEncoding]];
 	for (NSNumber *groupId in self.groupIds) {
 		[body appendData:[self textPart:[groupId stringValue] forKey:@"query[group_ids][]" boundary:boundary]];
 	}
-	[body appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n", boundary] dataUsingEncoding:NSASCIIStringEncoding]];
+	[body appendData:[[NSString stringWithFormat:@"--%@--\r\n", boundary] dataUsingEncoding:NSASCIIStringEncoding]];
 	return body;
 }
 
