@@ -21,6 +21,7 @@
 
 - (void)dealloc
 {
+	[locationManager release];
     [super dealloc];
 }
 
@@ -30,6 +31,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+	locationArrowView.hidden = YES;
+	locationManager = [[CLLocationManager alloc] init];
+	locationManager.delegate = self;
+	[locationManager startUpdatingLocation];
 	textView.font = [UIFont fontWithName:@"Courier" size:12.0];
 }
 
@@ -41,8 +46,9 @@
 
 - (void)viewDidUnload
 {
-	// Release any retained subviews of the main view.
-	// e.g. self.myOutlet = nil;
+	[imagePickerController release];
+	[textView release];
+	[locationArrowView release];
 }
 
 #pragma mark -
@@ -69,12 +75,22 @@
 		query.accessKey = @"df8d23140eb443505c0661c5b58294ef472baf64";
 		query.secretKey = @"054a431c8cd9c3cf819f3bc7aba592cc84c09ff7";
 		query.groupIds = [NSArray arrayWithObject:[NSNumber numberWithInt:32]];
+		query.location = locationManager.location; // might be nil
 		NSString *result = [query create];
-		textView.text = result;
-		
 		NSLog(@"The return string  %@", result);
+
+		textView.text = result;
+		[query release];
 	}
 }
 
+#pragma mark -
+#pragma mark CLLocationManagerDelegate methods
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
+{
+	[locationManager stopUpdatingLocation];
+	locationArrowView.hidden = NO;
+}
 
 @end

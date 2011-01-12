@@ -12,10 +12,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
 
-@interface KooabaQueryAppViewController : UIViewController <UIImagePickerControllerDelegate> {
+@interface KooabaQueryAppViewController : UIViewController <UIImagePickerControllerDelegate, CLLocationManagerDelegate> {
 	IBOutlet UIImagePickerController *imagePickerController;
 	IBOutlet UITextView *textView;
+	IBOutlet UIImageView *locationArrowView;
+	CLLocationManager *locationManager;
 }
 
 - (IBAction)takePicture;
