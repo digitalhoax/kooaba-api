@@ -1,9 +1,9 @@
 //
 //  main.m
-//  kooabaQuerySample
+//  KooabaQueryApp
 //
-//  Created by Joachim Fornallaz on 18.09.09.
-//  Copyright kooaba AG 2009. All rights reserved.
+//  Created by Joachim Fornallaz on 12.01.11.
+//  Copyright 2011 kooaba AG. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
