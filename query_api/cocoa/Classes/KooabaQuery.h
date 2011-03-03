@@ -12,23 +12,28 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreLocation/CoreLocation.h>
 
 
 @interface KooabaQuery : NSObject {
+	// Authentification
+	NSString *accessKey;
+	NSString *secretKey;
+	// Input Data
 	NSData *imageData;
 	NSString *imageType;
 	NSArray *groupIds;
-	NSString *accessKey;
-	NSString *secretKey;
+	CLLocation *location;
+	// Output Data
 	BOOL match;
 }
 
-@property(nonatomic, copy) NSArray *groupIds;
 @property(nonatomic, copy) NSString *accessKey;
 @property(nonatomic, copy) NSString *secretKey;
+@property(nonatomic, copy) NSArray *groupIds;
+@property(nonatomic, copy) CLLocation *location;
 
 - (id)initWithImageData:(NSData *)data type:(NSString *)type;
 - (NSString *)create;
-- (NSData *)textPart:(NSString *)text forKey:(NSString *)key boundary:(NSString *)boundary;
 
 @end

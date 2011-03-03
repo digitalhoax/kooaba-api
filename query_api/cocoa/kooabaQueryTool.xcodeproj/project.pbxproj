@@ -1,0 +1,266 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AA9D1FE810A044D1001D1D19 /* KooabaQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = AAC79C79109F277F00006B00 /* KooabaQuery.m */; };
+		AA9D203810A06770001D1D19 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = AA8C6B2A10677A4100FFBBB4 /* NSData+Base64.m */; };
+		AAA794BE10A040B2009FCC47 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAB16EAB10A02713007DF37A /* Foundation.framework */; };
+		AAA794BF10A040B6009FCC47 /* KooabaQueryTool.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB16E9510A02546007DF37A /* KooabaQueryTool.m */; };
+		AAAAEDBA10A1863C00C3E399 /* lena.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = AA9D1FE210A04304001D1D19 /* lena.jpg */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		AAAAEDB310A185CE00C3E399 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 16;
+			files = (
+				AAAAEDBA10A1863C00C3E399 /* lena.jpg in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		AA8C6B2910677A4100FFBBB4 /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSData+Base64.h"; path = "Classes/NSData+Base64.h"; sourceTree = "<group>"; };
+		AA8C6B2A10677A4100FFBBB4 /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSData+Base64.m"; path = "Classes/NSData+Base64.m"; sourceTree = "<group>"; };
+		AA9D1FE210A04304001D1D19 /* lena.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = lena.jpg; sourceTree = "<group>"; };
+		AAA7946D10A04088009FCC47 /* kooabaQueryTool */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = kooabaQueryTool; sourceTree = BUILT_PRODUCTS_DIR; };
+		AAB16E9510A02546007DF37A /* KooabaQueryTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KooabaQueryTool.m; sourceTree = "<group>"; };
+		AAB16E9C10A025BE007DF37A /* KooabaQueryTool_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KooabaQueryTool_Prefix.pch; sourceTree = "<group>"; };
+		AAB16EAB10A02713007DF37A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		AAC79C78109F277F00006B00 /* KooabaQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KooabaQuery.h; path = Classes/KooabaQuery.h; sourceTree = "<group>"; };
+		AAC79C79109F277F00006B00 /* KooabaQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KooabaQuery.m; path = Classes/KooabaQuery.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AAA7946B10A04088009FCC47 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AAA794BE10A040B2009FCC47 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		19C28FACFE9D520D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AAA7946D10A04088009FCC47 /* kooabaQueryTool */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
+			isa = PBXGroup;
+			children = (
+				AA8C6B2C10677A4500FFBBB4 /* Library */,
+				AAB16E8D10A024D8007DF37A /* Kooaba */,
+				AAB16E9710A025A0007DF37A /* Tool */,
+				AAB16E9D10A025E5007DF37A /* Frameworks */,
+				AA9D1FE210A04304001D1D19 /* lena.jpg */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+			);
+			name = CustomTemplate;
+			sourceTree = "<group>";
+		};
+		AA8C6B2C10677A4500FFBBB4 /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				AA8C6B2910677A4100FFBBB4 /* NSData+Base64.h */,
+				AA8C6B2A10677A4100FFBBB4 /* NSData+Base64.m */,
+			);
+			name = Library;
+			sourceTree = "<group>";
+		};
+		AAB16E8D10A024D8007DF37A /* Kooaba */ = {
+			isa = PBXGroup;
+			children = (
+				AAC79C78109F277F00006B00 /* KooabaQuery.h */,
+				AAC79C79109F277F00006B00 /* KooabaQuery.m */,
+			);
+			name = Kooaba;
+			sourceTree = "<group>";
+		};
+		AAB16E9710A025A0007DF37A /* Tool */ = {
+			isa = PBXGroup;
+			children = (
+				AAB16E9C10A025BE007DF37A /* KooabaQueryTool_Prefix.pch */,
+				AAB16E9510A02546007DF37A /* KooabaQueryTool.m */,
+			);
+			name = Tool;
+			sourceTree = "<group>";
+		};
+		AAB16E9D10A025E5007DF37A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AAB16EAB10A02713007DF37A /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		AAA7946C10A04088009FCC47 /* kooabaQueryTool */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AAA794C010A040D4009FCC47 /* Build configuration list for PBXNativeTarget "kooabaQueryTool" */;
+			buildPhases = (
+				AAA7946A10A04088009FCC47 /* Sources */,
+				AAA7946B10A04088009FCC47 /* Frameworks */,
+				AAAAEDB310A185CE00C3E399 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = kooabaQueryTool;
+			productName = kooabaQueryTool;
+			productReference = AAA7946D10A04088009FCC47 /* kooabaQueryTool */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "kooabaQueryTool" */;
+			compatibilityVersion = "Xcode 3.1";
+			developmentRegion = English;
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
+			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AAA7946C10A04088009FCC47 /* kooabaQueryTool */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AAA7946A10A04088009FCC47 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AAA794BF10A040B6009FCC47 /* KooabaQueryTool.m in Sources */,
+				AA9D1FE810A044D1001D1D19 /* KooabaQuery.m in Sources */,
+				AA9D203810A06770001D1D19 /* NSData+Base64.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		AAA7946F10A04089009FCC47 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = KooabaQueryTool_Prefix.pch;
+				INSTALL_PATH = /usr/local/bin;
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = kooabaQueryTool;
+			};
+			name = Debug;
+		};
+		AAA7947010A04089009FCC47 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = KooabaQueryTool_Prefix.pch;
+				INSTALL_PATH = /usr/local/bin;
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = kooabaQueryTool;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		C01FCF4F08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		C01FCF5008A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AAA794C010A040D4009FCC47 /* Build configuration list for PBXNativeTarget "kooabaQueryTool" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AAA7946F10A04089009FCC47 /* Debug */,
+				AAA7947010A04089009FCC47 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "kooabaQueryTool" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4F08A954540054247B /* Debug */,
+				C01FCF5008A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}

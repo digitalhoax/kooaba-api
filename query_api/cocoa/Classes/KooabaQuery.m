@@ -3,7 +3,7 @@
 //  kooabaQuerySample
 //
 //  Created by Joachim Fornallaz on 02.11.09.
-//  Copyright 2009 kooaba AG. All rights reserved.
+//  Copyright 2009-2011 kooaba AG. All rights reserved.
 //
 //  Permission is given to use this source code file, free of charge, in any
 //  project, commercial or otherwise, entirely at your risk, with the condition
@@ -47,39 +47,46 @@ NSData * SHA1Digest(NSString *inputString) {
 }
 
 
+@interface KooabaQuery (/* Private */)
+
+@property(nonatomic, retain) NSData *imageData;
+@property(nonatomic, copy) NSString *imageType;
+
+@end
+
+
 @implementation KooabaQuery
 
-@synthesize groupIds, accessKey, secretKey;
+@synthesize accessKey, secretKey, groupIds, location;
+@synthesize imageData, imageType; /* Private */
+
+#pragma mark -
+#pragma mark Object lifecycle
 
 - (id)initWithImageData:(NSData *)data type:(NSString *)type
 {
 	self = [super init];
 	if (self != nil) {
-		imageData = data;
-		imageType = type;
+		self.imageData = data;
+		self.imageType = type;
 		self.groupIds = [NSArray array];
-		self.accessKey = nil;
-		self.secretKey = nil;
-		match = NO;
 	}
 	return self;
 }
 
-- (NSData *)multipartFormDataWithBoundary:(NSString *)boundary
+- (void)dealloc
 {
-	NSMutableData *body = [NSMutableData data];
-	[body appendData:[[NSString stringWithFormat:@"--%@\r\n",boundary] dataUsingEncoding:NSASCIIStringEncoding]];
-	[body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"query[file]\"; filename=\"query.%@\"\r\n", imageType] dataUsingEncoding:NSASCIIStringEncoding]];
-	[body appendData:[[NSString stringWithFormat:@"Content-Type: image/%@\r\n", imageType] dataUsingEncoding:NSASCIIStringEncoding]];
-	[body appendData:[@"Content-Transfer-Encoding: binary\r\n" dataUsingEncoding:NSASCIIStringEncoding]];
-	[body appendData:[@"\r\n" dataUsingEncoding:NSASCIIStringEncoding]];
-	[body appendData:imageData];
-	for (NSNumber *groupId in self.groupIds) {
-		[body appendData:[self textPart:[groupId stringValue] forKey:@"query[group_ids][]" boundary:boundary]];
-	}
-	[body appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n", boundary] dataUsingEncoding:NSASCIIStringEncoding]];
-	return body;
+	[accessKey release];
+	[secretKey release];
+	[imageData release];
+	[imageType release];
+	[groupIds release];
+	[location release];
+	[super dealloc];
 }
+
+#pragma mark -
+#pragma mark Private methods
 
 - (NSData *)textPart:(NSString *)text forKey:(NSString *)key boundary:(NSString *)boundary
 {
@@ -88,6 +95,34 @@ NSData * SHA1Digest(NSString *inputString) {
 	[part appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n\r\n%@\r\n", key, text] dataUsingEncoding:NSASCIIStringEncoding]];
 	return part;
 }
+
+- (NSData *)multipartFormDataWithBoundary:(NSString *)boundary
+{
+	NSMutableData *body = [NSMutableData data];
+	// Image data part
+	[body appendData:[[NSString stringWithFormat:@"--%@\r\n",boundary] dataUsingEncoding:NSASCIIStringEncoding]];
+	[body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"query[file]\"; filename=\"query.%@\"\r\n", imageType] dataUsingEncoding:NSASCIIStringEncoding]];
+	[body appendData:[[NSString stringWithFormat:@"Content-Type: image/%@\r\n", imageType] dataUsingEncoding:NSASCIIStringEncoding]];
+	[body appendData:[@"Content-Transfer-Encoding: binary\r\n" dataUsingEncoding:NSASCIIStringEncoding]];
+	[body appendData:[@"\r\n" dataUsingEncoding:NSASCIIStringEncoding]];
+	[body appendData:imageData];
+	[body appendData:[@"\r\n" dataUsingEncoding:NSASCIIStringEncoding]];
+	// Group ID parts
+	for (NSNumber *groupId in self.groupIds) {
+		[body appendData:[self textPart:[groupId stringValue] forKey:@"query[group_ids][]" boundary:boundary]];
+	}
+	// Location parts
+	if (self.location) {
+		[body appendData:[self textPart:[NSString stringWithFormat:@"%f", location.coordinate.latitude] forKey:@"query[latitude]" boundary:boundary]];
+		[body appendData:[self textPart:[NSString stringWithFormat:@"%f", location.coordinate.longitude] forKey:@"query[longitude]" boundary:boundary]];
+	}
+	// End of boundary
+	[body appendData:[[NSString stringWithFormat:@"--%@--\r\n", boundary] dataUsingEncoding:NSASCIIStringEncoding]];
+	return body;
+}
+
+#pragma mark -
+#pragma mark Instance methods
 
 - (NSString *)create
 {
@@ -121,16 +156,6 @@ NSData * SHA1Digest(NSString *inputString) {
 	NSString *returnString = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
 	
 	return [returnString autorelease];
-}
-
-#pragma mark NSObject overwritten methods
-
-- (void)dealloc
-{
-	self.groupIds = nil;
-	self.accessKey = nil;
-	self.secretKey = nil;
-    [super dealloc];
 }
 
 @end
