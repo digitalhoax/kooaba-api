@@ -254,7 +254,11 @@ Note that the HTTP library you use will add addition headers (like _Accept_ and 
     Date: Sat, 09 May 2009 16:50:30 GMT
     Content-Type: multipart/form-data; boundary=985206851141787760
     Authorization: KWS df8d23140eb443505c0661c5b58294ef472baf64:q6RUy13K8efmAYwcfqTtKJGIlqE=
+    
+    --49182cdfb857c 
+    Content-Disposition: form-data; name="query[group_ids][]" 
 
+    32
     --118221163862253392190 
     Content-Disposition: form-data; name="query[multiple_items]" 
 
